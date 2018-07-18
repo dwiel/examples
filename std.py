@@ -12,6 +12,7 @@ alpha.update({'ship %s' % word: letter for word, letter in zip(alpha_alt, string
 
 alpha.update({'control %s' % k: Key('ctrl-%s' % v) for k, v in alnum})
 alpha.update({'command %s' % k: Key('cmd-%s' % v) for k, v in alnum})
+alpha.update({'chom %s' % k: Key('cmd-%s' % v) for k, v in alnum})
 alpha.update({'command shift %s' % k: Key('ctrl-shift-%s' % v) for k, v in alnum})
 alpha.update({'alt %s' % k: Key('alt-%s' % v) for k, v in alnum})
 
@@ -134,7 +135,7 @@ keymap.update({
     'up':    Key('up'),
     'down':  Key('down'),
 
-    'delete': Key('backspace'),
+    '(delete | junk)': Key('backspace'),
 
     'slap': [Key('cmd-right enter')],
     'enter': Key('enter'),
