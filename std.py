@@ -9,10 +9,11 @@ alnum = list(zip(alpha_alt, string.ascii_lowercase)) + [(str(i), str(i)) for i i
 alpha = {}
 alpha.update(dict(alnum))
 alpha.update({'ship %s' % word: letter for word, letter in zip(alpha_alt, string.ascii_uppercase)})
+alpha.update({'sky %s' % word: letter for word, letter in zip(alpha_alt, string.ascii_uppercase)})
 
 alpha.update({'control %s' % k: Key('ctrl-%s' % v) for k, v in alnum})
 alpha.update({'command %s' % k: Key('cmd-%s' % v) for k, v in alnum})
-alpha.update({'chom %s' % k: Key('cmd-%s' % v) for k, v in alnum})
+alpha.update({'Chom %s' % k: Key('cmd-%s' % v) for k, v in alnum})
 alpha.update({'command shift %s' % k: Key('ctrl-shift-%s' % v) for k, v in alnum})
 alpha.update({'alt %s' % k: Key('alt-%s' % v) for k, v in alnum})
 
@@ -20,6 +21,125 @@ mapping = {
     'semicolon': ';',
     'new-line': '\n',
     'new-paragraph': '\n\n',
+
+    'teak': 'k',
+    'virg': 'v',
+    'zug': 's',
+    'pre-': 'pre',
+    'the wheel': 'dwiel',
+    'the real': 'dwiel',
+    'the do real': 'zdwiel',
+    'shayna': 'shaina',
+    'our june': 'arjun',
+    'in turn': 'intern',
+
+    'fulsome': 'folsom',
+
+    'thumbs down': ':-1:',
+    'thumbs-down': ':-1:',
+    'thumbs up': ':+1:',
+    'thumbs-up': ':+1:',
+    'okay hand': ':ok_hand:',
+    'thinking face': ':thinking_face:',
+
+    'in-line': 'in line',
+
+    'jupiter': 'jupyter',
+    'pie': 'py',
+    '.pie': '.py',
+    'dot pie': '.py',
+    'dot by': '.py',
+    'dot hi': '.py',
+    '.hi': '.py',
+    '. hi': '.py',
+    '.by': '.py',
+    'dot shell': '.sh',
+    'self-taught': 'self.',
+    'self-doubt': 'self.',
+    'pip installed': 'pip install',
+    'rapper': 'wrapper',
+    'stack trace': 'stacktrace',
+    'repose': 'repos',
+    'ellis': 'elif',
+    'deck': 'deque',
+    "log it's": 'logits',
+    'sell': 'cell',
+    'jeep you': 'gpu',
+    'endo': 'end',
+    'and oh': 'end',
+    'rappers': 'wrappers',
+    'poynter': 'pointer',
+    'numb': 'num',
+    'gnome': 'num',
+    'don': 'done',
+
+    'nirvana': 'nervana',
+    'terrace': 'keras',
+    'karis': 'keras',
+    'me on': 'neon',
+    'expand dimms': 'expand dims',
+    'dimms': 'dims',
+    'dems': 'dims',
+    'seek to seek': 'Seq2Seq',
+    'data set': 'dataset',
+    'data loader': 'dataloader',
+    'call back': 'callback',
+    'jim': 'gym',
+    'angie': 'ng',
+    'and g': 'ng',
+    'mg': 'ng',
+    'mp': 'np',
+    'and p': 'np',
+    'all the rhythms': 'algorithms',
+    'all rhythms': 'algorithms',
+    'access': 'axis',
+    'waits': 'weights',
+    'wait': 'weight',
+    'dk': 'decay',
+    'epoque': 'epoch',
+    'epic': 'epoch',
+    'epoques': 'epochs',
+    'epics': 'epochs',
+    '1 hot': 'onehot',
+    'one hot': 'onehot',
+    'scaler': 'scalar',
+    'sql light': 'sqlight',
+    'post gress': 'postgres',
+    'sink': 'sync',
+    'and betting': 'embedding',
+    'I am betting': 'embedding',
+    "I'm betting": 'embedding',
+    'phil': 'fill',
+    'gam': 'gan',
+    'gann': 'gan',
+
+    'ncloud interactive': 'ncloud interact',
+
+    'not equal': ' != ',
+    'is less than': ' < ',
+    'is greater than': ' > ',
+    'is less than or equal to': ' <= ',
+    'is greater than or equal to': ' >= ',
+    'is equal to': ' == ',
+    "one's": 'ones',
+
+    'pseudo-': 'sudo',
+    'pipe': '|',
+    'apt get': 'apt-get',
+    'macron': 'make run',
+    'make show': 'make shell',
+    'standard out': 'stdout',
+    'standard in': 'stdin',
+    'standard error': 'stderr',
+    'les': 'less',
+    'doctor': 'docker',
+    'communities': 'kubernetes',
+    'shall': 'shell',
+    'backslash': '\\',
+
+    'ron': 'run',
+    'thorpe': '\t',
+    'tharp': '\t',
 }
 punctuation = set('.,-!?')
 
@@ -69,17 +189,30 @@ def rot13(i, word, _):
     return out
 
 formatters = {
+    'cram':  (True, lambda i, word, _: word if i == 0 else word.capitalize()),
+    'pathway':  (True, lambda i, word, _: word if i == 0 else '/'+word, 0),
+    'dotsway':  (True, lambda i, word, _: word if i == 0 else '.'+word, 0),
+    'yellsmash':  (True, lambda i, word, _: word.upper(), 0),
+    'yellsnik':  (True, lambda i, word, _: word.upper() if i == 0 else '_'+word.upper(), 0),
+    'dollcram': (True, lambda i, word, _: '$'+word if i == 0 else word.capitalize(), 0),
+    'champ': (True, lambda i, word, _: word.capitalize() if i == 0 else " "+word, 0),
+    'lowcram': (True, lambda i, word, _: '@'+word if i == 0 else word.capitalize(), 0),
+    'criff': (True, lambda i, word, _: word.capitalize(), 0),
+    'criffed': (True, lambda i, word, _: word.capitalize(), 0),
+    'yeller': (False, lambda i, word, _: word.upper(), 0),
     'dunder': (True,  lambda i, word, _: '__%s__' % word if i == 0 else word),
     'camel':  (True,  lambda i, word, _: word if i == 0 else word.capitalize()),
     'snake':  (True,  lambda i, word, _: word if i == 0 else '_'+word),
     'smash':  (True,  lambda i, word, _: word),
     # spinal or kebab?
-    'kebab':  (True,  lambda i, word, _: word if i == 0 else '-'+word),
+    'spine':  (True,  lambda i, word, _: word if i == 0 else '-'+word),
     # 'sentence':  (False, lambda i, word, _: word.capitalize() if i == 0 else word),
     'title':  (False, lambda i, word, _: word.capitalize()),
     'allcaps': (False, lambda i, word, _: word.upper()),
     'dubstring': (False, surround('"')),
+    'coif': (False, surround('"')),
     'string': (False, surround("'")),
+    'posh': (False, surround("'")),
     'padded': (False, surround(" ")),
     'rot-thirteen':  (False, rot13),
 }
@@ -129,16 +262,18 @@ keymap.update({
 
     '(%s)+ [<dgndictation>]' % (' | '.join(formatters)): FormatText,
 
-    'tab':   Key('tab'),
-    'left':  Key('left'),
-    'right': Key('right'),
-    'up':    Key('up'),
-    'down':  Key('down'),
+    '(tarp | tab)':   Key('tab'),
+    '(crimp | left)':  Key('left'),
+    '(chris | right)': Key('right'),
+    '(jeep | up)':    Key('up'),
+    '(doom | down)':  Key('down'),
 
     '(delete | junk)': Key('backspace'),
+    'trough': Key('alt-backspace'),
 
-    'slap': [Key('cmd-right enter')],
+    '(slap | shock)': [Key('cmd-right enter')],
     'enter': Key('enter'),
+    'sky shock': Key('shift-enter'),
     'escape': Key('esc'),
     'question [mark]': '?',
     'tilde': '~',
@@ -168,6 +303,13 @@ keymap.update({
     'space': ' ',
     '[forward] slash': '/',
     'backslash': '\\',
+
+    'page up': Key('pageup'),
+    'page down': Key('pagedown'),
+    'ricky': Key('ctrl-e'),
+    'lefty': Key('ctrl-a'),
+    'olly': Key('cmd-a'),
+
 
     '(dot dot | dotdot)': '..',
     'cd': 'cd ',
@@ -261,12 +403,7 @@ keymap.update({
     'word (dickt | dictionary)': 'dict',
     'word shell': 'shell',
 
-    'word lunixbochs': 'lunixbochs',
     'word talon': 'talon',
-    'word Point2d': 'Point2d',
-    'word Point3d': 'Point3d',
-    'title Point': 'Point',
-    'word angle': 'angle',
 
     'dunder in it': '__init__',
     'self taught': 'self.',
@@ -282,11 +419,11 @@ keymap.update({
     'call': '()',
     'indirect': '&',
     'dereference': '*',
-    '(op equals | assign)': ' = ',
-    'op (minus | subtract)': ' - ',
-    'op (plus | add)': ' + ',
-    'op (times | multiply)': ' * ',
-    'op divide': ' / ',
+    '(op equals | assign | equeft)': ' = ',
+    '(op (minus | subtract) | deminus)': ' - ',
+    '(op (plus | add) | deplush)': ' + ',
+    '(op (times | multiply) | duster)': ' * ',
+    '(op divide | divy)': ' / ',
     'op mod': ' % ',
     '[op] (minus | subtract) equals': ' -= ',
     '[op] (plus | add) equals': ' += ',
@@ -330,5 +467,9 @@ keymap.update({
 
     'scroll down': [Key('down')] * 30,
     'scroll up': [Key('up')] * 30,
+
+
+    '(marco | search)': Key(''),
 })
+
 ctx.keymap(keymap)

@@ -1,20 +1,32 @@
+# from https://github.com/talonvoice/examples
+# jsc added my app shortcuts
+
 from talon.voice import Word, Context, Key, Rep, Str, press
 from talon import ui
 
 apps = {}
 
-def switch_app(m):
-    name = str(m._words[1])
+def switch_app(m, name=None):		# jsc modified
+    if name is None:
+        name = str(m._words[1])
     full = apps.get(name)
-    if not full: return
+    if not full:
+        return
     for app in ui.apps():
         if app.name == full:
             app.focus()
             break
 
+
 ctx = Context('switcher')
 keymap = {
     'focus {switcher.apps}': switch_app,
+    # jsc additions:
+    'madam': lambda x: switch_app(x, "Atom"),
+    'fox chrome': lambda x: switch_app(x, "Google Chrome"),
+    'fox outlook': lambda x: switch_app(x, "Outlook"),
+	'fox slack': lambda x: switch_app(x, "Slack"),
+	'fox iterm': lambda x: switch_app(x, "iTerm"),
 }
 ctx.keymap(keymap)
 
@@ -22,8 +34,6 @@ def update_lists():
     global apps
     new = {}
     for app in ui.apps():
-        if not app.windows():
-            continue
         words = app.name.split(' ')
         for word in words:
             if word and not word in new:
@@ -34,9 +44,11 @@ def update_lists():
     ctx.set_list('apps', new.keys())
     apps = new
 
+
 def ui_event(event, arg):
-    if event in ('app_activate', 'app_launch', 'app_close', 'win_open', 'win_close'):
+    if event in ('app_activate', 'app_deactivate', 'app_launch', 'app_close'):
         update_lists()
+
 
 ui.register('', ui_event)
 update_lists()

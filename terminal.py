@@ -48,7 +48,7 @@ keymap = {
 
     # make
     'make': 'make\n',
-    'make run': 'make run\n'
+    'make run': 'make run\n',
     'make test': 'make test\n',
     'make build': 'make build\n',
 

@@ -29,7 +29,8 @@ keymap = {
     'caret': '^',
     'at sign': '@',
     '(and sign | ampersand | amper)': '&',
-    'spike': '|',
+    '(pipe | spike)': '|',
+    '(D pipe)': ' | ',
 
     '(dubquote | double quote | quatches)': '"',
     '(quote | quatchet)': "'",
@@ -64,7 +65,7 @@ keymap = {
     'equeft': ' = ',
     '([is] equal to | longqual)': ' == ',
     '([is] not equal to | banquall)': ' != ',
-    'trickle': ' === ',
+    '(trickle | triple equal)': ' === ',
     '(ranqual | nockle)': ' !== ',
 
     '(arrow | lambo)': ' -> ',
