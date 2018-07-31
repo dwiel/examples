@@ -64,7 +64,7 @@ context.keymap({
     '(reopen | unclose) tab': Key('cmd-shift-t'),
 
     'next tab': Key('cmd-alt-right'),
-    '(last | prevous) tab': Key('cmd-alt-left'),
+    '(last | prevous | preev) tab': Key('cmd-alt-left'),
 
     'tab (1 | 2 | 3 | 4 | 5 | 6 | 7 | 8)': jump_tab,
     '(end | rightmost) tab': Key('cmd-9'),

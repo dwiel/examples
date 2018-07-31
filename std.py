@@ -309,7 +309,7 @@ keymap.update({
     'page down': Key('pagedown'),
     'ricky': Key('ctrl-e'),
     'lefty': Key('ctrl-a'),
-    'olly': Key('cmd-a'),
+    'olly | ali': Key('cmd-a'),
 
 
     '(dot dot | dotdot)': '..',

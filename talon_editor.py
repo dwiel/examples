@@ -34,11 +34,16 @@ alpha_alt = 'air bat cap die each fail gone harm sit jury crash look mad near od
 alnum = dict(list(zip(alpha_alt, string.ascii_lowercase)) + [(str(i), str(i)) for i in range(0, 10)])
 alnum['left paren'] = '('
 alnum['right paren'] = ')'
-keys = '({})'.format(' | '.join(alpha_alt + list(string.ascii_uppercase)))
+alnum['left'] = 'left'
+alnum['right'] = 'right'
+keys = '({})'.format(' | '.join(list(alnum.keys()) + list(string.ascii_uppercase)))
+print(keys)
 
 ctx.keymap({
     'key (command | shift | control | alt | option)* ' + keys: key,
     'map <dgndictation>': ("'", std.text, "': ,", Key('left')),
-    'map string <dgndictation>': ("'", std.text, "': ,", "'", std.text, "'"),
+    # 'map string <dgndictation>': ("'", std.text, "': ", "'", std.text, "',"),
+    'map string <dgndictation>': ("'{}': '{}'".format(std.text, std.text)),
+
 
 })

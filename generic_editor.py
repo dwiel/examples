@@ -251,7 +251,6 @@ keymap = {
     'shockey': Key('ctrl-a cmd-left enter up'),
     'shockoon': Key('cmd-right enter'),
     # 'sprinkoon' + numerals: jump_to_eol_and(lambda: press('enter')),
-    'olly': Key('cmd-a'),
 
     '(indent | shabble)': Key('cmd-['),
     '(outdent | shabber)': Key('cmd-]'),
