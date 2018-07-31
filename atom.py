@@ -1,5 +1,7 @@
 from talon.voice import Key, press, Str, Context
 
+from user.utils import parse_words_as_integer
+
 ctx = Context('atom', bundle='com.github.atom')
 
 atom_hotkey = 'cmd-shift-ctrl-alt-t'
@@ -134,12 +136,14 @@ def change_pain(m):
         press('cmd-right')
 
 def command_from_palette(command):
-    return [
-        Key(atom_command_pallet),
-        Str(command)(None),
-        Key('enter')
-    ]
+    press(atom_command_pallet)
+    Str(command)(None)
+    press('enter')
 
+def jump_tab(m):
+    tab_number = parse_words_as_integer(m._words[1:])
+    if tab_number != None and tab_number > 0 and tab_number < 10:
+        press('cmd-%s'%tab_number)
 
 keymap = {
     'sprinkle' + optional_numerals: jump_to_bol,
@@ -152,8 +156,8 @@ keymap = {
 
     'snipline' + optional_numerals: jump_to_bol_and(snipline),
 
-    'snipple': [Key(atom_hotkey), Key(COMMANDS.DELETE_TO_BOL)],
-    'snipper': [Key(atom_hotkey), Key(COMMANDS.DELETE_TO_EOL)],
+    # 'snipple': [Key(atom_hotkey), Key(COMMANDS.DELETE_TO_BOL)],
+    # 'snipper': [Key(atom_hotkey), Key(COMMANDS.DELETE_TO_EOL)],
 
     # needs bracket-matcher atom package; still a bit poor.
     'bracken': [Key('cmd-ctrl-m')],
@@ -173,11 +177,15 @@ keymap = {
     'sprinkoon' + numerals: jump_to_eol_and(lambda: press('enter')),
 
     'peach': Key('cmd-t'),
+    'advanced open file': Key('cmd-alt-o'),
     'pain' + numerals: change_pain,
+    'tab' + numerals: jump_tab,
     'mark all': Key('cmd-shift-f'),
 
-    'focus center': lambda: command_from_palette('center-line:toggle'),
-    'focus top': lambda: command_from_palette('center-line:toggle') * 2,
+    'cursor center': lambda m: command_from_palette('center-line:toggle'),
+    'cursor top': lambda m: command_from_palette('center-line:toggle') and command_from_palette('center-line:toggle'),
+
+
 }
 
 ctx.keymap(keymap)

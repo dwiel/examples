@@ -68,6 +68,7 @@ shrink_map = {
     'generator': 'gen',
     'memory': 'mem',
     'environments': 'envs',
+    'environment': 'env'
 }
 
 # TODO: allow using shrink within dictation

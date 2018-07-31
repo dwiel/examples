@@ -26,7 +26,8 @@ keymap = {
     'fox chrome': lambda x: switch_app(x, "Google Chrome"),
     'fox outlook': lambda x: switch_app(x, "Outlook"),
 	'fox slack': lambda x: switch_app(x, "Slack"),
-	'fox iterm': lambda x: switch_app(x, "iTerm"),
+	'fox iterm': lambda x: switch_app(x, "iTerm2"),
+    'fox term': lambda x: switch_app(x, "iTerm2"),
 }
 ctx.keymap(keymap)
 

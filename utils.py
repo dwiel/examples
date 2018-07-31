@@ -1,4 +1,5 @@
 import string
+import itertools
 
 from talon.voice import Str, Key
 
@@ -114,6 +115,14 @@ def text_to_range(words, delimiter="until"):
     start = text_to_number(words[:split])
     end = text_to_number(words[split + 1 :])
     return start, end
+
+number_conversions = {
+    'oh': '0', # 'oh' => zero
+}
+for i, w in enumerate(['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',]):
+    number_conversions[str(i)] = str(i)
+    number_conversions[w] = str(i)
+    number_conversions['%s\\number'%(w)] = str(i)
 
 def parse_words_as_integer(words):
     # TODO: Once implemented, use number input value rather than manually parsing number words with this function

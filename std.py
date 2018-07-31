@@ -190,16 +190,16 @@ def rot13(i, word, _):
 
 formatters = {
     'cram':  (True, lambda i, word, _: word if i == 0 else word.capitalize()),
-    'pathway':  (True, lambda i, word, _: word if i == 0 else '/'+word, 0),
-    'dotsway':  (True, lambda i, word, _: word if i == 0 else '.'+word, 0),
-    'yellsmash':  (True, lambda i, word, _: word.upper(), 0),
-    'yellsnik':  (True, lambda i, word, _: word.upper() if i == 0 else '_'+word.upper(), 0),
-    'dollcram': (True, lambda i, word, _: '$'+word if i == 0 else word.capitalize(), 0),
-    'champ': (True, lambda i, word, _: word.capitalize() if i == 0 else " "+word, 0),
-    'lowcram': (True, lambda i, word, _: '@'+word if i == 0 else word.capitalize(), 0),
-    'criff': (True, lambda i, word, _: word.capitalize(), 0),
-    'criffed': (True, lambda i, word, _: word.capitalize(), 0),
-    'yeller': (False, lambda i, word, _: word.upper(), 0),
+    'pathway':  (True, lambda i, word, _: word if i == 0 else '/'+word),
+    'dotsway':  (True, lambda i, word, _: word if i == 0 else '.'+word),
+    'yellsmash':  (True, lambda i, word, _: word.upper()),
+    'yellsnik':  (True, lambda i, word, _: word.upper() if i == 0 else '_'+word.upper()),
+    'dollcram': (True, lambda i, word, _: '$'+word if i == 0 else word.capitalize()),
+    'champ': (True, lambda i, word, _: word.capitalize() if i == 0 else " "+word),
+    'lowcram': (True, lambda i, word, _: '@'+word if i == 0 else word.capitalize()),
+    'criff': (True, lambda i, word, _: word.capitalize()),
+    'criffed': (True, lambda i, word, _: word.capitalize()),
+    'yeller': (False, lambda i, word, _: word.upper()),
     'dunder': (True,  lambda i, word, _: '__%s__' % word if i == 0 else word),
     'camel':  (True,  lambda i, word, _: word if i == 0 else word.capitalize()),
     'snake':  (True,  lambda i, word, _: word if i == 0 else '_'+word),
@@ -236,6 +236,7 @@ def FormatText(m):
     for i, word in enumerate(words):
         word = parse_word(word)
         for name in reversed(fmt):
+            print(name, formatters[name])
             smash, func = formatters[name]
             word = func(i, word, i == len(words)-1)
             spaces = spaces and not smash
