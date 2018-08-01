@@ -3,7 +3,7 @@
 
 import talon.clip as clip
 from talon.voice import Key, press, Str, Context
-from user.utils import parse_words
+from user.utils import parse_words, join_words
 
 ctx = Context('generic_editor') # , bundle='com.microsoft.VSCode')
 

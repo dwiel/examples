@@ -1,67 +1,54 @@
-import logging
+from talon.voice import Context, talon
+from talon.engine import engine
 
-from talon.voice import Context, Key, talon, ContextGroup, Str
 
+macro = []
+last_actions = None
+macro_recording = False
+def macro_record(j):
+    global macro
+    global last_actions
+    global macro_recording
 
-recorded_actions = []
-macro_group = None
-
-def execute_action(action, m):
-    if isinstance(action, Key):
-        action(m)
-    else:
-        Str(action)(m)
-
-def wrap(action):
-    global recorded_actions
-
-    def wrapper(m):
-        recorded_actions.append((action, m))
-        logging.info(str(recorded_actions))
-        execute_action(action, m)
-    return wrapper
-
-def macro_stop(m):
-    global recorded_actions
-    global macro_group
-
-    print('recorded_actions', recorded_actions)
-    talon.enable()
-    macro_group.disable()
-    macro_group.unload()
-
-def macro_play(m):
-    global recorded_actions
-
-    for action, m in recorded_actions:
-        execute_action(action, m)
+    if macro_recording:
+        if j['cmd'] == 'p.end' and j['path']:
+            new = talon.last_actions
+            if new != last_actions:
+                macro.extend(new)
+                last_actions = new
 
 def macro_start(m):
-    try:
-        global macro_group
+    global macro
+    global macro_recording
 
-        logging.info('macro_start')
+    macro_recording = True
+    macro = []
 
-        macro_group = ContextGroup('macro')
-        for context_name, context in talon.subs.items():
-            c = Context('copy_'+context_name, group=macro_group)
-            keymap = {}
-            for trigger, name in context.triggers.items():
-                keymap[trigger] = wrap(context.mapping[name])
-            c.keymap(keymap)
+def macro_stop(m):
+    global macro
+    global macro_recording
 
-        c = Context('macro_control', group=macro_group)
-        c.keymap({'macro stop': macro_stop})
+    if macro_recording:
+        macro = macro[1:]
+        macro_recording = False
 
-        macro_group.load()
-        talon.disable()
-        macro_group.enable()
-    except:
-        macro_group.disable()
-        talon.enable()
+def macro_play(m):
+    global macro
+
+    macro_stop(None)
+
+    tmp = []
+    for item in macro:
+        for action, rule in item:
+            act = action(rule) or (action, rule)
+            tmp.append(tmp)
+    return tmp
+
+engine.register('post:phrase', macro_record)
 
 ctx = Context('macro')
 ctx.keymap({
     'macro start': macro_start,
+    'macro stop': macro_stop,
     'macro play': macro_play,
 })
