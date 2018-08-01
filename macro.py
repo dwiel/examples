@@ -1,6 +1,6 @@
 from talon.voice import Context, talon
 from talon.engine import engine
-
+from user.utils import text_to_number
 
 macro = []
 last_actions = None
@@ -37,12 +37,9 @@ def macro_play(m):
 
     macro_stop(None)
 
-    tmp = []
     for item in macro:
         for action, rule in item:
             act = action(rule) or (action, rule)
-            tmp.append(tmp)
-    return tmp
 
 engine.register('post:phrase', macro_record)
 
