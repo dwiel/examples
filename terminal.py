@@ -28,6 +28,8 @@ def text(m):
 
 keymap = {
     'cd': ['cd ; ls', Key('left'), Key('left'), Key('left'), Key('left')],
+    'cd wild': ['cd **; ls', Key('left'), Key('left'), Key('left'), Key('left'), Key('left')],
+    'cd wild [<dgndictation>]': ['cd **; ls', Key('left'), Key('left'), Key('left'), Key('left'), Key('left'), text],
     '(ls | run ellis | run alice)': 'ls\n',
     '(la | run la)': 'ls -la\n',
     'durrup': 'cd ..; ls\n',
@@ -45,6 +47,8 @@ keymap = {
     'shell move [<dgndictation>]': ['mv ', text],
     'shell remove [<dgndictation>]': ['rm ', text],
     'shell remove (recursive | curse) [<dgndictation>]': ['rm -rf ', text],
+    "shell enter": "ag -l | entr ",
+    "shell enter to": "ag -l . ../.. | entr ",
 
     # make
     'make': 'make\n',

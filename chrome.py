@@ -52,7 +52,8 @@ def jump_tab(m):
 
 
 context.keymap({
-    'address bar': focus_address_bar,
+    '(address bar | focus address | focus url)': focus_address_bar,
+    'copy url': 'yy',
 
     'back[ward]': back,
     'forward': forward,
@@ -88,7 +89,7 @@ context.keymap({
     '[show] security [panel]': lambda m: show_panel('Security'),
     '[show] source[s] [panel]': lambda m: show_panel('Sources'),
 
-    'refocus page': refocus_page,
+    '(refocus | focus) page': refocus_page,
     '[refocus] dev tools': open_focus_devtools,
 
     # Clipboard

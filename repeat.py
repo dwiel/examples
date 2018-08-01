@@ -13,6 +13,7 @@ def repeat(m):
     repeat_count = parse_words_as_integer(m._words[1:])
 
     if repeat_count != None and repeat_count >= 2:
+        print('Rep', Rep)
         repeater = Rep(repeat_count - 1)
         repeater.ctx = talon
         return repeater(None)

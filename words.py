@@ -1,15 +1,19 @@
 from talon.voice import Context, Key, Str
 
 ctx = Context('words')
+
+
+last_word = None
 def shrink_word(m):
     word = str(m.dgndictation[0]._words[0]).lower()
     if not word in shrink_map:
+        last_word = word
         raise Exception('%s not in shrink map' % word)
     Str(shrink_map[word])(None)
 
-keymap = {
+ctx.keymap({
     'shrink <dgndictation>': shrink_word,
-}
+})
 
 shrink_map = {
     'administrator': 'admin',
@@ -71,6 +75,3 @@ shrink_map = {
     'environment': 'env',
     'application': 'app',
 }
-
-# TODO: allow using shrink within dictation
-ctx.keymap(keymap)

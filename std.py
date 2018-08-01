@@ -234,7 +234,7 @@ def FormatText(m):
     tmp = []
     spaces = True
     for i, word in enumerate(words):
-        word = parse_word(word)
+        word = parse_word(word).lower()
         for name in reversed(fmt):
             print(name, formatters[name])
             smash, func = formatters[name]
@@ -284,12 +284,11 @@ keymap.update({
     '(semi | semicolon)': ';',
     'colon': ':',
     '(square | left square [bracket])': '[', '(rsquare | are square | right square [bracket])': ']',
-    '(paren | left paren)': '(', '(rparen | are paren | right paren)': ')',
     '(brace | left brace)': '{', '(rbrace | are brace | right brace)': '}',
     '(angle | left angle | less than)': '<', '(rangle | are angle | right angle | greater than)': '>',
 
     '(star | asterisk)': '*',
-    '(pound | hash [sign] | octo | thorpe | number sign)': '#',
+    '(pound | hash [sign] | octo | number sign)': '#',
     'percent [sign]': '%',
     'caret': '^',
     'at sign': '@',
@@ -313,7 +312,6 @@ keymap.update({
 
 
     '(dot dot | dotdot)': '..',
-    'cd': 'cd ',
     'cd talon home': 'cd {}'.format(TALON_HOME),
     'cd talon user': 'cd {}'.format(TALON_USER),
     'cd talon plugins': 'cd {}'.format(TALON_PLUGINS),
@@ -469,8 +467,8 @@ keymap.update({
     'scroll down': [Key('down')] * 30,
     'scroll up': [Key('up')] * 30,
 
-
-    '(marco | search)': Key(''),
+    '(marco | search)': Key('cmd-f'),
+    'marthis': [Key('alt-right'), Key('shift-alt-left'), Key('cmd-f'), Key('enter')],
 })
 
 ctx.keymap(keymap)

@@ -1,5 +1,6 @@
 from talon.voice import Context, Key, Str
 from user import std
+from user.utils import parse_words
 import string
 
 ctx = Context('talon_editor')
@@ -29,6 +30,10 @@ def key(m):
 
     Str("Key('{}')".format('-'.join(modifiers + [key])))(None)
 
+def format_text(fmt):
+    def wrapper(m):
+        Str(fmt.format(' '.join(parse_words(m))))(None)
+    return wrapper
 
 alpha_alt = 'air bat cap die each fail gone harm sit jury crash look mad near odd pit quest red sun trap urge vest whale box yes zip'.split()
 alnum = dict(list(zip(alpha_alt, string.ascii_lowercase)) + [(str(i), str(i)) for i in range(0, 10)])
@@ -36,14 +41,13 @@ alnum['left paren'] = '('
 alnum['right paren'] = ')'
 alnum['left'] = 'left'
 alnum['right'] = 'right'
+alnum['enter'] = 'enter'
+
 keys = '({})'.format(' | '.join(list(alnum.keys()) + list(string.ascii_uppercase)))
 print(keys)
 
 ctx.keymap({
     'key (command | shift | control | alt | option)* ' + keys: key,
     'map <dgndictation>': ("'", std.text, "': ,", Key('left')),
-    # 'map string <dgndictation>': ("'", std.text, "': ", "'", std.text, "',"),
-    'map string <dgndictation>': ("'{}': '{}'".format(std.text, std.text)),
-
-
+    'map string <dgndictation>': format_text("'{0}': '{0}',"),
 })

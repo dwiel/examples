@@ -16,7 +16,7 @@ keymap = {
 
     '(square | left square [bracket] | brackorp)': '[',
     '(rsquare | are square | right square [bracket] | brackose)': ']',
-    '(paren | left paren)': '(',
+    '(paren | left paren | precose)': '(',
     '(rparen | are paren | right paren)': ')',
     '(brace | left brace | kirksorp)': '{',
     '(rbrace | are brace | right brace | kirkos)': '}',
@@ -24,7 +24,7 @@ keymap = {
     '(rangle | are angle | right angle | greater than)': '>',
 
     '(star | asterisk)': '*',
-    '(pound | hash [sign] | octo | thorpe | number sign)': '#',
+    '(pound | hash [sign] | octo | number sign)': '#',
     'percent [sign]': '%',
     'caret': '^',
     'at sign': '@',
@@ -75,7 +75,6 @@ keymap = {
     # surrounders
     '(empty array | brackers)': '[]',
     'brax-block': ['[', Key('enter')],
-    '(call | prekris)': '()',
     'prex-block': ['(', Key('enter')],
     'angler': ['<>', Key('left')],
     'brax': ['[]', Key('left')],

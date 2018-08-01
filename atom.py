@@ -1,6 +1,6 @@
 from talon.voice import Key, press, Str, Context
-
-from user.utils import parse_words_as_integer
+from user import std
+from user.utils import parse_words_as_integer, parse_words
 
 ctx = Context('atom', bundle='com.github.atom')
 
@@ -145,6 +145,19 @@ def jump_tab(m):
     if tab_number != None and tab_number > 0 and tab_number < 10:
         press('cmd-%s'%tab_number)
 
+snippets = {
+    'define function': 'definefunction',
+    'define method': 'definemethod',
+    'doc string': 'docstring',
+    'for loop': 'forloop',
+    'print': 'print',
+}
+
+def code_snippet(m):
+    words = ' '.join([str(word).lower() for word in m._words[1:]])
+    Str(snippets[words])(None)
+    press('tab')
+
 keymap = {
     'sprinkle' + optional_numerals: jump_to_bol,
     'spring' + optional_numerals: jump_to_eol_and(jump_to_beginning_of_text),
@@ -162,7 +175,7 @@ keymap = {
     # needs bracket-matcher atom package; still a bit poor.
     'bracken': [Key('cmd-ctrl-m')],
 
-    'copy line' + numerals: copy_line,
+    '(copy line | clonesert)' + numerals: copy_line,
     'move line' + numerals: move_line,
 
     'crew <dgndictation>': find_next,
@@ -170,22 +183,23 @@ keymap = {
 
     'shackle': Key('cmd-l'),
     'selrang' + numerals: select_lines,
-    'clonesert': 'todo',
 
     'shockey': Key('cmd-shift-enter'),
     'shockoon': Key('cmd-right enter'),
     'sprinkoon' + numerals: jump_to_eol_and(lambda: press('enter')),
 
     'peach': Key('cmd-t'),
+    'peach <dgndictation>': [Key('cmd-t'), std.text],
     'advanced open file': Key('cmd-alt-o'),
     'pain' + numerals: change_pain,
     'tab' + numerals: jump_tab,
     'mark all': Key('cmd-shift-f'),
 
+    'command pallet': Key(atom_command_pallet),
     'cursor center': lambda m: command_from_palette('center-line:toggle'),
     'cursor top': lambda m: command_from_palette('center-line:toggle') and command_from_palette('center-line:toggle'),
 
-
+    'quinn' + '({})'.format(' | '.join(snippets.keys())): code_snippet,
 }
 
 ctx.keymap(keymap)

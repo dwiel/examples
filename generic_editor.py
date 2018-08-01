@@ -3,6 +3,7 @@
 
 import talon.clip as clip
 from talon.voice import Key, press, Str, Context
+from user.utils import parse_words
 
 ctx = Context('generic_editor') # , bundle='com.microsoft.VSCode')
 
@@ -247,6 +248,7 @@ keymap = {
     'trail <dgndictation>': select_text_to_left_of_cursor,
     'wordneck' + optional_numerals: word_neck,
     'wordprev' + optional_numerals: word_prev,
+    'word this': [Key('alt-right'), Key('shift-alt-left')],
 
     'shockey': Key('ctrl-a cmd-left enter up'),
     'shockoon': Key('cmd-right enter'),
