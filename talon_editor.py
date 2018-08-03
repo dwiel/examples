@@ -13,7 +13,7 @@ def key(m):
     if 'shift' in words:
         modifiers.append('shift')
     if 'control' in words:
-        modifiers.append('control')
+        modifiers.append('ctrl')
     if 'option' in words or 'alt' in words:
         modifiers.append('alt')
 

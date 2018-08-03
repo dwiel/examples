@@ -1,4 +1,4 @@
-from talon.voice import Context, talon
+from talon.voice import Context, talon, Key, Str
 from talon.engine import engine
 from user.utils import text_to_number
 
@@ -41,6 +41,21 @@ def macro_play(m):
         for action, rule in item:
             act = action(rule) or (action, rule)
 
+def macro_print(m):
+    global macro
+
+    macro_stop(None)
+
+    actions = []
+    for item in macro:
+        for action, rule in item:
+            if isinstance(action, Key):
+                actions.append('Key("{}")'.format(action.data))
+            else:
+                # TODO: other conditions
+                actions.append(str(action))
+    Str('['+', '.join(actions)+']')(None)
+
 engine.register('post:phrase', macro_record)
 
 ctx = Context('macro')
@@ -48,4 +63,5 @@ ctx.keymap({
     'macro start': macro_start,
     'macro stop': macro_stop,
     'macro play': macro_play,
+    'macro print': macro_print,
 })

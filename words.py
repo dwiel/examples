@@ -75,7 +75,7 @@ shrink_map = {
     'environment': 'env',
     'application': 'app',
 
-    "inc.": "inc"
+    "inc.": "inc",
     "_c": "char",
     "administrator": "admin",
     "administrators": "admins",
@@ -180,4 +180,4 @@ shrink_map = {
     "october": "oct",
     "november": "nov",
     "december": "dec",
-},
+}

@@ -140,6 +140,11 @@ def command_from_palette(command):
     Str(command)(None)
     press('enter')
 
+def command(command):
+    def function(m):
+        command_from_palette(command)
+    return function
+
 def jump_tab(m):
     tab_number = parse_words_as_integer(m._words[1:])
     if tab_number != None and tab_number > 0 and tab_number < 10:
@@ -172,9 +177,6 @@ keymap = {
     # 'snipple': [Key(atom_hotkey), Key(COMMANDS.DELETE_TO_BOL)],
     # 'snipper': [Key(atom_hotkey), Key(COMMANDS.DELETE_TO_EOL)],
 
-    # needs bracket-matcher atom package; still a bit poor.
-    'bracken': [Key('cmd-ctrl-m')],
-
     '(copy line | clonesert)' + numerals: copy_line,
     'move line' + numerals: move_line,
 
@@ -190,16 +192,25 @@ keymap = {
 
     'peach': Key('cmd-t'),
     'peach <dgndictation>': [Key('cmd-t'), std.text],
+    'peachy <dgndictation>': [Key('cmd-t'), std.text, Key('enter')],
     'advanced open file': Key('cmd-alt-o'),
     'pain' + numerals: change_pain,
     'tab' + numerals: jump_tab,
     'mark all': Key('cmd-shift-f'),
 
     'command pallet': Key(atom_command_pallet),
-    'cursor center': lambda m: command_from_palette('center-line:toggle'),
-    'cursor top': lambda m: command_from_palette('center-line:toggle') and command_from_palette('center-line:toggle'),
+    'cursor center': command('center-line:toggle'),
+    'cursor top': [command('center-line:toggle'), command('center-line:toggle')],
+    'cell pair': command('py-ast-edit:select-parent'),
+    'cell this': command('py-ast-edit:select-this'),
+
+    # needs bracket-matcher atom package; still a bit poor.
+    'bracken': command('bracket-matcher:select-inside-bracket'),
+    'go match': command('bracket-matcher:go-to-matching-bracket'),
+    'remove matching brackets': command('bracket-matcher:remove-matching-brackets'),
 
     'quinn' + '({})'.format(' | '.join(snippets.keys())): code_snippet,
+    '({})'.format(' | '.join(snippets.keys())): code_snippet,
 }
 
 ctx.keymap(keymap)

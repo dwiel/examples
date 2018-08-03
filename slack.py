@@ -13,6 +13,8 @@ keymap = {
     'fourthly': Key('cmd-]'),
     'goneck': Key('shift-alt-down'),
     'gopreev': Key('shift-alt-up'),
+
+    'toggle sidebar': Key('cmd-.'),
 }
 
 ctx.keymap(keymap)

@@ -242,8 +242,6 @@ keymap = {
 
     'shackle': Key('cmd-right shift-cmd-left'),
 
-    'bracken': [Key('cmd-shift-ctrl-right')],
-
     'crew <dgndictation>': select_text_to_right_of_cursor,
     'trail <dgndictation>': select_text_to_left_of_cursor,
     'wordneck' + optional_numerals: word_neck,
