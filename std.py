@@ -3,6 +3,8 @@ from talon import ctrl, clip
 from talon_init import TALON_HOME, TALON_PLUGINS, TALON_USER
 import string
 
+from user.utils import parse_word, surround, text, sentence_text, word, parse_words
+
 alpha_alt = 'air bat cap die each fail gone harm sit jury crash look mad near odd pit quest red sun trap urge vest whale box yes zip'.split()
 alnum = list(zip(alpha_alt, string.ascii_lowercase)) + [(str(i), str(i)) for i in range(0, 10)]
 
@@ -17,168 +19,6 @@ alpha.update({'Chom %s' % k: Key('cmd-%s' % v) for k, v in alnum})
 alpha.update({'command shift %s' % k: Key('ctrl-shift-%s' % v) for k, v in alnum})
 alpha.update({'alt %s' % k: Key('alt-%s' % v) for k, v in alnum})
 
-mapping = {
-    'semicolon': ';',
-    'new-line': '\n',
-    'new-paragraph': '\n\n',
-
-    'teak': 'k',
-    'virg': 'v',
-    'zug': 's',
-    'pre-': 'pre',
-    'the wheel': 'dwiel',
-    'the real': 'dwiel',
-    'the do real': 'zdwiel',
-    'shayna': 'shaina',
-    'our june': 'arjun',
-    'in turn': 'intern',
-
-    'fulsome': 'folsom',
-
-    'thumbs down': ':-1:',
-    'thumbs-down': ':-1:',
-    'thumbs up': ':+1:',
-    'thumbs-up': ':+1:',
-    'okay hand': ':ok_hand:',
-    'thinking face': ':thinking_face:',
-
-    'in-line': 'in line',
-
-    'jupiter': 'jupyter',
-    'pie': 'py',
-    '.pie': '.py',
-    'dot pie': '.py',
-    'dot by': '.py',
-    'dot hi': '.py',
-    '.hi': '.py',
-    '. hi': '.py',
-    '.by': '.py',
-    'dot shell': '.sh',
-    'self-taught': 'self.',
-    'self-doubt': 'self.',
-    'pip installed': 'pip install',
-    'rapper': 'wrapper',
-    'stack trace': 'stacktrace',
-    'repose': 'repos',
-    'ellis': 'elif',
-    'deck': 'deque',
-    "log it's": 'logits',
-    'sell': 'cell',
-    'jeep you': 'gpu',
-    'endo': 'end',
-    'and oh': 'end',
-    'rappers': 'wrappers',
-    'poynter': 'pointer',
-    'numb': 'num',
-    'gnome': 'num',
-    'don': 'done',
-
-    'nirvana': 'nervana',
-    'terrace': 'keras',
-    'karis': 'keras',
-    'me on': 'neon',
-    'expand dimms': 'expand dims',
-    'dimms': 'dims',
-    'dems': 'dims',
-    'seek to seek': 'Seq2Seq',
-    'data set': 'dataset',
-    'data loader': 'dataloader',
-    'call back': 'callback',
-    'jim': 'gym',
-    'angie': 'ng',
-    'and g': 'ng',
-    'mg': 'ng',
-    'mp': 'np',
-    'and p': 'np',
-    'all the rhythms': 'algorithms',
-    'all rhythms': 'algorithms',
-    'access': 'axis',
-    'waits': 'weights',
-    'wait': 'weight',
-    'dk': 'decay',
-    'epoque': 'epoch',
-    'epic': 'epoch',
-    'epoques': 'epochs',
-    'epics': 'epochs',
-    '1 hot': 'onehot',
-    'one hot': 'onehot',
-    'scaler': 'scalar',
-    'sql light': 'sqlight',
-    'post gress': 'postgres',
-    'sink': 'sync',
-    'and betting': 'embedding',
-    'I am betting': 'embedding',
-    "I'm betting": 'embedding',
-    'phil': 'fill',
-    'gam': 'gan',
-    'gann': 'gan',
-
-    'ncloud interactive': 'ncloud interact',
-
-    'not equal': ' != ',
-    'is less than': ' < ',
-    'is greater than': ' > ',
-    'is less than or equal to': ' <= ',
-    'is greater than or equal to': ' >= ',
-    'is equal to': ' == ',
-    "one's": 'ones',
-
-    'pseudo-': 'sudo',
-    'pipe': '|',
-    'apt get': 'apt-get',
-    'macron': 'make run',
-    'make show': 'make shell',
-    'standard out': 'stdout',
-    'standard in': 'stdin',
-    'standard error': 'stderr',
-    'les': 'less',
-    'doctor': 'docker',
-    'communities': 'kubernetes',
-    'shall': 'shell',
-    'backslash': '\\',
-
-    'ron': 'run',
-    'thorpe': '\t',
-    'tharp': '\t',
-}
-punctuation = set('.,-!?')
-
-def parse_word(word):
-    word = str(word).lstrip('\\').split('\\', 1)[0]
-    word = mapping.get(word, word)
-    return word
-
-def join_words(words, sep=' '):
-    out = ''
-    for i, word in enumerate(words):
-        if i > 0 and word not in punctuation:
-            out += sep
-        out += word
-    return out
-
-def parse_words(m):
-    return list(map(parse_word, m.dgndictation[0]._words))
-
-def insert(s):
-    Str(s)(None)
-
-def text(m):
-    insert(join_words(parse_words(m)).lower())
-
-def sentence_text(m):
-    text = join_words(parse_words(m)).lower()
-    insert(text.capitalize())
-
-def word(m):
-    text = join_words(list(map(parse_word, m.dgnwords[0]._words)))
-    insert(text.lower())
-
-def surround(by):
-    def func(i, word, last):
-        if i == 0: word = by + word
-        if last: word += by
-        return word
-    return func
 
 def rot13(i, word, _):
     out = ''
@@ -236,7 +76,6 @@ def FormatText(m):
     for i, word in enumerate(words):
         word = parse_word(word).lower()
         for name in reversed(fmt):
-            print(name, formatters[name])
             smash, func = formatters[name]
             word = func(i, word, i == len(words)-1)
             spaces = spaces and not smash
@@ -261,7 +100,7 @@ keymap.update({
     'more <dgndictation> [over]': [' ', text],
     'word <dgnwords>': word,
 
-    '(%s)+ [<dgndictation>]' % (' | '.join(formatters)): FormatText,
+    '(%s)+ [<dgndictation>] [over]' % (' | '.join(formatters)): FormatText,
 
     '(tarp | tab)':   Key('tab'),
     '(crimp | left)':  Key('left'),

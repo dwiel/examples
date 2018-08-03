@@ -1,19 +1,17 @@
 from talon.voice import Context, Key, Str
+from user.utils import alternatives, parse_word
 
 ctx = Context('words')
 
 
 last_word = None
 def shrink_word(m):
-    word = str(m.dgndictation[0]._words[0]).lower()
+    word = str(m._words[1])
     if not word in shrink_map:
         last_word = word
         raise Exception('%s not in shrink map' % word)
     Str(shrink_map[word])(None)
 
-ctx.keymap({
-    'shrink <dgndictation>': shrink_word,
-})
 
 shrink_map = {
     'administrator': 'admin',
@@ -181,3 +179,7 @@ shrink_map = {
     "november": "nov",
     "december": "dec",
 }
+
+ctx.keymap({
+    'shrink' + alternatives(shrink_map.keys()): shrink_word,
+})

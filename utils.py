@@ -3,12 +3,135 @@ import itertools
 
 from talon.voice import Str, Key
 
-mapping = {"semicolon": ";", "new-line": "\n", "new-paragraph": "\n\n"}
+mapping = {
+    'semicolon': ';',
+    'new-line': '\n',
+    'new-paragraph': '\n\n',
+
+    'teak': 'k',
+    'virg': 'v',
+    'zug': 's',
+    'pre-': 'pre',
+    'the wheel': 'dwiel',
+    'the real': 'dwiel',
+    'the do real': 'zdwiel',
+    'shayna': 'shaina',
+    'our june': 'arjun',
+    'in turn': 'intern',
+
+    'fulsome': 'folsom',
+
+    'thumbs down': ':-1:',
+    'thumbs-down': ':-1:',
+    'thumbs up': ':+1:',
+    'thumbs-up': ':+1:',
+    'okay hand': ':ok_hand:',
+    'thinking face': ':thinking_face:',
+
+    'in-line': 'in line',
+
+    'jupiter': 'jupyter',
+    'pie': 'py',
+    '.pie': '.py',
+    'dot pie': '.py',
+    'dot by': '.py',
+    'dot hi': '.py',
+    '.hi': '.py',
+    '. hi': '.py',
+    '.by': '.py',
+    'dot shell': '.sh',
+    'self-taught': 'self.',
+    'self-doubt': 'self.',
+    'pip installed': 'pip install',
+    'rapper': 'wrapper',
+    'stack trace': 'stacktrace',
+    'repose': 'repos',
+    'ellis': 'elif',
+    'deck': 'deque',
+    "log it's": 'logits',
+    'sell': 'cell',
+    'jeep you': 'gpu',
+    'endo': 'end',
+    'and oh': 'end',
+    'rappers': 'wrappers',
+    'poynter': 'pointer',
+    'numb': 'num',
+    'gnome': 'num',
+    'don': 'done',
+
+    'nirvana': 'nervana',
+    'terrace': 'keras',
+    'karis': 'keras',
+    'me on': 'neon',
+    'expand dimms': 'expand dims',
+    'dimms': 'dims',
+    'dems': 'dims',
+    'seek to seek': 'Seq2Seq',
+    'data set': 'dataset',
+    'data loader': 'dataloader',
+    'call back': 'callback',
+    'jim': 'gym',
+    'angie': 'ng',
+    'and g': 'ng',
+    'mg': 'ng',
+    'mp': 'np',
+    'and p': 'np',
+    'all the rhythms': 'algorithms',
+    'all rhythms': 'algorithms',
+    'access': 'axis',
+    'waits': 'weights',
+    'wait': 'weight',
+    'dk': 'decay',
+    'epoque': 'epoch',
+    'epic': 'epoch',
+    'epoques': 'epochs',
+    'epics': 'epochs',
+    '1 hot': 'onehot',
+    'one hot': 'onehot',
+    'scaler': 'scalar',
+    'sql light': 'sqlight',
+    'post gress': 'postgres',
+    'sink': 'sync',
+    'and betting': 'embedding',
+    'I am betting': 'embedding',
+    "I'm betting": 'embedding',
+    'phil': 'fill',
+    'gam': 'gan',
+    'gann': 'gan',
+
+    'ncloud interactive': 'ncloud interact',
+
+    'not equal': ' != ',
+    'is less than': ' < ',
+    'is greater than': ' > ',
+    'is less than or equal to': ' <= ',
+    'is greater than or equal to': ' >= ',
+    'is equal to': ' == ',
+    "one's": 'ones',
+
+    'pseudo-': 'sudo',
+    'pipe': '|',
+    'apt get': 'apt-get',
+    'macron': 'make run',
+    'make show': 'make shell',
+    'standard out': 'stdout',
+    'standard in': 'stdin',
+    'standard error': 'stderr',
+    'les': 'less',
+    'doctor': 'docker',
+    'communities': 'kubernetes',
+    'shall': 'shell',
+    'backslash': '\\',
+
+    'ron': 'run',
+    'thorpe': '\t',
+    'tharp': '\t',
+}
 punctuation = set(".,-!?")
 
 
 def parse_word(word):
-    word = str(word).lstrip("\\").split("\\", 1)[0]
+    word = str(word).lstrip('\\').split('\\', 1)[0].lower()
     word = mapping.get(word, word)
     return word
 
@@ -16,7 +139,8 @@ def parse_word(word):
 def parse_words(m):
     try:
         return list(map(parse_word, m.dgndictation[0]._words))
-    except AttributeError:
+    except AttributeError as e:
+        print(e)
         return []
 
 
@@ -51,7 +175,6 @@ def word(m):
 
 
 def surround(by):
-
     def func(i, word, last):
         if i == 0:
             word = by + word
@@ -152,3 +275,20 @@ def parse_words_as_integer(words):
 
     # Create merged number string and convert to int
     return int(''.join(normalized_number_values))
+
+
+def alternatives(options):
+    return ' (' + ' | '.join(sorted(options)) + ')+'
+
+def optional(options):
+    return ' (' + ' | '.join(sorted(options)) + ')*'
+
+
+
+numeral_map = dict((str(n), n) for n in range(0, 20))
+for n in [20, 30, 40, 50, 60, 70, 80, 90]:
+    numeral_map[str(n)] = n
+numeral_map["oh"] = 0 # synonym for zero
+
+numerals          = ' (' + ' | '.join(sorted(numeral_map.keys())) + ')+'
+optional_numerals = ' (' + ' | '.join(sorted(numeral_map.keys())) + ')*'

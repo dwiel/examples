@@ -1,6 +1,8 @@
 from talon.voice import Word, Key, Context, Str
 import string
 
+from user.utils import numerals
+
 terminals = ('com.apple.Terminal', 'com.googlecode.iterm2')
 ctx = Context('terminal', func=lambda app, win: any(
     t in app.bundle for t in terminals))
@@ -26,6 +28,7 @@ def text(m):
     except AttributeError:
         return
 
+
 keymap = {
     'cd': ['cd ; ls', Key('left'), Key('left'), Key('left'), Key('left')],
     'cd wild': ['cd **; ls', Key('left'), Key('left'), Key('left'), Key('left'), Key('left')],
@@ -49,6 +52,11 @@ keymap = {
     'shell remove (recursive | curse) [<dgndictation>]': ['rm -rf ', text],
     "shell enter": "ag -l | entr ",
     "shell enter to": "ag -l . ../.. | entr ",
+    'shell less [<dgndictation>]': ['less ', text],
+    'shell cat [<dgndictation>]': ['cat ', text],
+    'shell X args [<dgndictation>]': ['xargs ', text],
+
+    'activate virtual environment': ['source `find . | grep bin/activate$`', Key('enter')],
 
     # make
     'make': 'make\n',
@@ -86,6 +94,8 @@ keymap = {
     'pee socks': 'ps aux ',
     'vi': 'vi ',
 }
+
+keymap.update({'pain '+str(i): Key('alt-'+str(i)) for i in range(10)})
 
 ctx.keymap(keymap)
 

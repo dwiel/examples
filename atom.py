@@ -1,6 +1,6 @@
 from talon.voice import Key, press, Str, Context
 from user import std
-from user.utils import parse_words_as_integer, parse_words
+from user.utils import parse_words_as_integer, parse_words, numeral_map, numerals, optional_numerals
 
 ctx = Context('atom', bundle='com.github.atom')
 
@@ -23,14 +23,6 @@ COMMANDS = Struct(
 )
 
 ############## support for parsing numbers as command postfix
-
-numeral_map = dict((str(n), n) for n in range(0, 20))
-for n in [20, 30, 40, 50, 60, 70, 80, 90]:
-    numeral_map[str(n)] = n
-numeral_map["oh"] = 0 # synonym for zero
-
-numerals          = ' (' + ' | '.join(sorted(numeral_map.keys())) + ')+'
-optional_numerals = ' (' + ' | '.join(sorted(numeral_map.keys())) + ')*'
 
 def text_to_number(m):
 
@@ -156,6 +148,8 @@ snippets = {
     'doc string': 'docstring',
     'for loop': 'forloop',
     'print': 'print',
+    'import': 'import',
+    'from import': 'fromimport',
 }
 
 def code_snippet(m):
@@ -196,6 +190,10 @@ keymap = {
     'advanced open file': Key('cmd-alt-o'),
     'pain' + numerals: change_pain,
     'tab' + numerals: jump_tab,
+    'split pain left': [Key('cmd-k'), Key('left')],
+    'split pain right': [Key('cmd-k'), Key('right')],
+    'split pain up': [Key('cmd-k'), Key('up')],
+    'split pain down': [Key('cmd-k'), Key('down')],
     'mark all': Key('cmd-shift-f'),
 
     'command pallet': Key(atom_command_pallet),
