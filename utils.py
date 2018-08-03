@@ -109,6 +109,7 @@ mapping = {
     'is equal to': ' == ',
     "one's": 'ones',
 
+    'adam': 'atom',
     'pseudo-': 'sudo',
     'pipe': '|',
     'apt get': 'apt-get',

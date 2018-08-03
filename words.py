@@ -178,6 +178,8 @@ shrink_map = {
     "october": "oct",
     "november": "nov",
     "december": "dec",
+
+    'dictionary': 'dict',
 }
 
 ctx.keymap({

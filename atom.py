@@ -150,6 +150,8 @@ snippets = {
     'print': 'print',
     'import': 'import',
     'from import': 'fromimport',
+    'list': 'list',
+    'dictionary': 'dict',
 }
 
 def code_snippet(m):

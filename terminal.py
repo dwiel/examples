@@ -30,6 +30,9 @@ def text(m):
 
 
 keymap = {
+    # some habits die hard
+    'troll char': Key('ctrl-c'),
+
     'cd': ['cd ; ls', Key('left'), Key('left'), Key('left'), Key('left')],
     'cd wild': ['cd **; ls', Key('left'), Key('left'), Key('left'), Key('left'), Key('left')],
     'cd wild [<dgndictation>]': ['cd **; ls', Key('left'), Key('left'), Key('left'), Key('left'), Key('left'), text],
