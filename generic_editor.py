@@ -148,14 +148,16 @@ def word_neck(m):
         word_index = 1
 
     old = clip.get()
+    press('shift-right', wait=2000)
     press("cmd-c", wait=2000)
+    press('shift-left', wait=2000)
     current_highlight = clip.get()
-    if current_highlight:
+    if len(current_highlight) > 1:
         press('right', wait=2000)
     press("shift-end", wait=2000)
     press("cmd-c", wait=2000)
     press("left", wait=2000)
-    text_right = clip.get()
+    text_right = clip.get().lower()
     clip.set(old)
 
     is_word = [character in alphanumeric for character in text_right]
@@ -165,11 +167,16 @@ def word_neck(m):
         i += 1
 
     print('a start', i)
+
     while i < (len(is_word) - 1) and word_count < word_index:
         print(i, is_word[i], word_count, word_index)
         if not is_word[i] and is_word[i+1]:
             word_count += 1
         i += 1
+    # warning: this is a hack, sorry
+    print('i', i)
+    if i == 1 and is_word[0]:
+        i = 0
     start_position = i
     print(text_right[start_position:])
     while i < len(is_word) and is_word[i]:
@@ -190,14 +197,16 @@ def word_prev(m):
         word_index = 1
 
     old = clip.get()
+    press('shift-right', wait=2000)
     press("cmd-c", wait=2000)
+    press('shift-left', wait=2000)
     current_highlight = clip.get()
-    if current_highlight:
+    if len(current_highlight) > 1:
         press('left', wait=2000)
     press("shift-home", wait=2000)
     press("cmd-c", wait=2000)
     press("right", wait=2000)
-    text_right = clip.get()
+    text_right = clip.get().lower()
     clip.set(old)
 
     text_right = list(reversed(text_right))

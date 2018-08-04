@@ -211,6 +211,12 @@ keymap = {
 
     'quinn' + '({})'.format(' | '.join(snippets.keys())): code_snippet,
     '({})'.format(' | '.join(snippets.keys())): code_snippet,
+
+    'to do': 'TODO: ',
+
+    # python
+    'if': ['if :', Key('left')],
+    'else': ['else:', Key('enter')],
 }
 
 ctx.keymap(keymap)

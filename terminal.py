@@ -1,7 +1,7 @@
-from talon.voice import Word, Key, Context, Str
+from talon.voice import Word, Key, Context, Str, press
 import string
 
-from user.utils import numerals
+from user.utils import numerals, parse_words
 
 terminals = ('com.apple.Terminal', 'com.googlecode.iterm2')
 ctx = Context('terminal', func=lambda app, win: any(
@@ -29,9 +29,22 @@ def text(m):
         return
 
 
+def dash(m):
+    words = parse_words(m)
+    press(' ')
+    if len(words) == 1 and len(words[0]) == 1:
+        press('-')
+        Str(words[0])(None)
+    else:
+        press('-')
+        press('-')
+        Str('-'.join(words))(None)
+
+
 keymap = {
     # some habits die hard
     'troll char': Key('ctrl-c'),
+    'reverse': Key('ctrl-r'),
 
     'cd': ['cd ; ls', Key('left'), Key('left'), Key('left'), Key('left')],
     'cd wild': ['cd **; ls', Key('left'), Key('left'), Key('left'), Key('left'), Key('left')],
@@ -40,6 +53,8 @@ keymap = {
     '(la | run la)': 'ls -la\n',
     'durrup': 'cd ..; ls\n',
     'go back': 'cd -\n',
+
+    'dash <dgndictation>': dash,
 
     'pseudo': 'sudo ',
     'shell clear': [Key('ctrl-c'), 'clear\n'],
@@ -96,6 +111,14 @@ keymap = {
     'gripper': ['grep -r  .', Key('left left')],
     'pee socks': 'ps aux ',
     'vi': 'vi ',
+
+    # python
+    'pip': 'pip',
+    'pip install': 'pip install ',
+    'pip install requirements': 'pip install -r ',
+    'pip install editable': 'pip install -e ',
+    'pip uninstall': 'pip uninstall ',
+    'pip list': 'pip list',
 }
 
 keymap.update({'pain '+str(i): Key('alt-'+str(i)) for i in range(10)})

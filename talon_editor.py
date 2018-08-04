@@ -50,4 +50,6 @@ ctx.keymap({
     'key (command | shift | control | alt | option)* ' + keys: key,
     'map <dgndictation>': ("'", std.text, "': ,", Key('left')),
     'map string <dgndictation>': format_text("'{0}': '{0}',"),
+    'dragon dictation': '<dgndictation>',
+    'stir': ['Str()(None)'] + [Key('left')] * 7,
 })
