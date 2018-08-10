@@ -1,6 +1,8 @@
 # https://github.com/JonathanNickerson/talon_voice_user_scripts
 # jsc added indent/outdent and simplified jolt
 
+import time
+
 import talon.clip as clip
 from talon.voice import Key, press, Str, Context
 from user.utils import parse_words, join_words
@@ -155,8 +157,10 @@ def word_neck(m):
     if len(current_highlight) > 1:
         press('right', wait=2000)
     press("shift-end", wait=2000)
+    time.sleep(0.25)
     press("cmd-c", wait=2000)
     press("left", wait=2000)
+    time.sleep(0.25)
     text_right = clip.get().lower()
     clip.set(old)
 
@@ -204,8 +208,10 @@ def word_prev(m):
     if len(current_highlight) > 1:
         press('left', wait=2000)
     press("shift-home", wait=2000)
+    time.sleep(0.25)
     press("cmd-c", wait=2000)
     press("right", wait=2000)
+    time.sleep(0.25)
     text_right = clip.get().lower()
     clip.set(old)
 
@@ -253,6 +259,7 @@ keymap = {
 
     'crew <dgndictation>': select_text_to_right_of_cursor,
     'trail <dgndictation>': select_text_to_left_of_cursor,
+    'shift home': Key('shift-home'),
     'wordneck' + optional_numerals: word_neck,
     'wordprev' + optional_numerals: word_prev,
     'word this': [Key('alt-right'), Key('shift-alt-left')],

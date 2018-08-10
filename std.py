@@ -1,3 +1,5 @@
+import os
+
 from talon.voice import Word, Context, Key, Rep, RepPhrase, Str, press
 from talon import ctrl, clip
 from talon_init import TALON_HOME, TALON_PLUGINS, TALON_USER
@@ -49,6 +51,7 @@ formatters = {
     'spine':  (True,  lambda i, word, _: word if i == 0 else '-'+word),
     # 'sentence':  (False, lambda i, word, _: word.capitalize() if i == 0 else word),
     'title':  (False, lambda i, word, _: word.capitalize()),
+    'tridal':  (False, lambda i, word, _: word.capitalize()),
     'allcaps': (False, lambda i, word, _: word.upper()),
     'dubstring': (False, surround('"')),
     'coif': (False, surround('"')),
@@ -71,6 +74,9 @@ def FormatText(m):
         if not words:
             return
 
+    print(m._words)
+    print(fmt)
+    print(words)
     tmp = []
     spaces = True
     for i, word in enumerate(words):
@@ -310,6 +316,8 @@ keymap.update({
     'marneck': Key('cmd-g'),
     'marpreev': Key('cmd-shift-g'),
     'marthis': [Key('alt-right'), Key('shift-alt-left'), Key('cmd-f'), Key('enter')],
+
+    'put computer to sleep': lambda m: os.system('pmset sleepnow'),
 })
 
 ctx.keymap(keymap)

@@ -1,9 +1,12 @@
 from talon.voice import Context, Key
+from user.utils import text
+
 
 ctx = Context('slack', bundle='com.tinyspeck.slackmacgap')
 
 keymap = {
     'channel': Key('cmd-k'),
+    'channel <dgndictation>': [Key('cmd-k'), text, Key('enter')],
     'channel up': Key('alt-up'),
     'channel down': Key('alt-down'),
     '(highlight command | insert command)': ['``', Key('left')],

@@ -1,6 +1,7 @@
 import string
 import itertools
 
+from talon import clip
 from talon.voice import Str, Key
 
 mapping = {
@@ -138,11 +139,14 @@ def parse_word(word):
 
 
 def parse_words(m):
-    try:
-        return list(map(parse_word, m.dgndictation[0]._words))
-    except AttributeError as e:
-        print(e)
-        return []
+    if isinstance(m, list):
+        return list(map(parse_word, m))
+    else:
+        try:
+            return list(map(parse_word, m.dgndictation[0]._words))
+        except AttributeError as e:
+            print(e)
+            return []
 
 
 def join_words(words, sep=" "):
@@ -150,7 +154,7 @@ def join_words(words, sep=" "):
     for i, word in enumerate(words):
         if i > 0 and word not in punctuation:
             out += sep
-        out += word
+        out += str(word)
     return out
 
 
@@ -281,6 +285,9 @@ def parse_words_as_integer(words):
 def alternatives(options):
     return ' (' + ' | '.join(sorted(options)) + ')+'
 
+def select_single(options):
+    return ' (' + ' | '.join(sorted(options)) + ')'
+
 def optional(options):
     return ' (' + ' | '.join(sorted(options)) + ')*'
 
@@ -293,3 +300,10 @@ numeral_map["oh"] = 0 # synonym for zero
 
 numerals          = ' (' + ' | '.join(sorted(numeral_map.keys())) + ')+'
 optional_numerals = ' (' + ' | '.join(sorted(numeral_map.keys())) + ')*'
+
+def preserve_clipboard(fn):
+    def wrapped_function(*args, **kwargs):
+        old = clip.get()
+        fn(*args, **kwargs)
+        clip.set(old)
+    return wrapped_function

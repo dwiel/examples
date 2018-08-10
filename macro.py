@@ -50,17 +50,22 @@ def macro_print(m):
     for item in macro:
         for action, rule in item:
             if isinstance(action, Key):
-                actions.append('Key("{}")'.format(action.data))
+                actions.append('press("{}")'.format(action.data))
+            if isinstance(action, Str):
+                actions.append('Str("{}")(None)'.format(action.data))
             else:
                 # TODO: other conditions
                 actions.append(str(action))
-    Str('['+', '.join(actions)+']')(None)
+
+    for action in actions:
+        Str(action)(None)
+        press('enter')
 
 engine.register('post:phrase', macro_record)
 
 ctx = Context('macro')
 ctx.keymap({
-    'macro start': macro_start,
+    'macro (start | record)': macro_start,
     'macro stop': macro_stop,
     'macro play': macro_play,
     'macro print': macro_print,

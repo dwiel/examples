@@ -1,6 +1,6 @@
 from talon.voice import Key, press, Str, Context
 from user import std
-from user.utils import parse_words_as_integer, parse_words, numeral_map, numerals, optional_numerals
+from user.utils import parse_words_as_integer, parse_words, numeral_map, numerals, optional_numerals, text
 
 ctx = Context('atom', bundle='com.github.atom')
 
@@ -145,11 +145,12 @@ def jump_tab(m):
 snippets = {
     'define function': 'definefunction',
     'define method': 'definemethod',
+    'define command': 'definecommand',
     'doc string': 'docstring',
     'for loop': 'forloop',
     'print': 'print',
     'import': 'import',
-    'from import': 'fromimport',
+    'from': 'from',
     'list': 'list',
     'dictionary': 'dict',
 }
@@ -187,8 +188,8 @@ keymap = {
     'sprinkoon' + numerals: jump_to_eol_and(lambda: press('enter')),
 
     'peach': Key('cmd-t'),
-    'peach <dgndictation>': [Key('cmd-t'), std.text],
-    'peachy <dgndictation>': [Key('cmd-t'), std.text, Key('enter')],
+    'peach <dgndictation>': [Key('cmd-t'), text],
+    'peachy <dgndictation>': [Key('cmd-t'), text, Key('enter')],
     'advanced open file': Key('cmd-alt-o'),
     'pain' + numerals: change_pain,
     'tab' + numerals: jump_tab,
@@ -212,11 +213,11 @@ keymap = {
     'quinn' + '({})'.format(' | '.join(snippets.keys())): code_snippet,
     '({})'.format(' | '.join(snippets.keys())): code_snippet,
 
-    'to do': 'TODO: ',
-
     # python
-    'if': ['if :', Key('left')],
+    'quinn if': ['if :', Key('left')],
     'else': ['else:', Key('enter')],
+    'self': 'self',
+    'to do': '# TODO: ',
 }
 
 ctx.keymap(keymap)

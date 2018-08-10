@@ -6,7 +6,7 @@ ctx = Context('keeper')
 def keeper(j):
     if j['cmd'] == 'p.end' and j['grammar'] == 'talon':
         phrase = j['phrase']
-        if phrase[0] == 'keeper':
+        if phrase and phrase[0] == 'keeper':
             Str(' '.join(map(parse_word, phrase[1:])))(None)
             return False
 

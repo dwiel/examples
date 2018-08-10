@@ -6,7 +6,7 @@ from talon import ui
 
 apps = {}
 
-def switch_app(m, name=None):		# jsc modified
+def switch_app(m, name=None):
     if name is None:
         name = str(m._words[1])
     full = apps.get(name)
@@ -21,13 +21,14 @@ def switch_app(m, name=None):		# jsc modified
 ctx = Context('switcher')
 keymap = {
     'focus {switcher.apps}': switch_app,
-    # jsc additions:
     'madam': lambda x: switch_app(x, "Atom"),
     'fox chrome': lambda x: switch_app(x, "Google Chrome"),
     'fox outlook': lambda x: switch_app(x, "Outlook"),
 	'fox slack': lambda x: switch_app(x, "Slack"),
 	'fox iterm': lambda x: switch_app(x, "iTerm2"),
     'fox term': lambda x: switch_app(x, "iTerm2"),
+    'fox skype': lambda x: switch_app(x, "Skype for Business"),
+    'fox signal': lambda x: switch_app(x, "Signal"),
 }
 ctx.keymap(keymap)
 
