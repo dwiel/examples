@@ -1,4 +1,5 @@
 import string
+import collections
 import itertools
 
 from talon import clip
@@ -102,14 +103,6 @@ mapping = {
 
     'ncloud interactive': 'ncloud interact',
 
-    'not equal': ' != ',
-    'is less than': ' < ',
-    'is greater than': ' > ',
-    'is less than or equal to': ' <= ',
-    'is greater than or equal to': ' >= ',
-    'is equal to': ' == ',
-    "one's": 'ones',
-
     'adam': 'atom',
     'pseudo-': 'sudo',
     'pipe': '|',
@@ -124,11 +117,17 @@ mapping = {
     'communities': 'kubernetes',
     'shall': 'shell',
     'backslash': '\\',
+    'jet tub': 'github',
+    'jet hub': 'github',
 
     'ron': 'run',
     'thorpe': '\t',
     'tharp': '\t',
 }
+mappings = collections.defaultdict(dict)
+for k, v in mapping.items():
+    mappings[len(k.split(' '))][k] = v
+
 punctuation = set(".,-!?")
 
 
@@ -137,16 +136,35 @@ def parse_word(word):
     word = mapping.get(word, word)
     return word
 
+def replace_words(words, mapping, count):
+    if len(words) < count:
+        return words
+
+    new_words = []
+    i = 0
+    while i < len(words) - count + 1:
+        phrase = words[i:i + count]
+        key = ' '.join(phrase)
+        if key in mapping:
+            new_words.append(mapping[key])
+            i = i + count
+        else:
+            new_words.append(phrase[0])
+            i = i + 1
+
+    new_words.extend(words[i:])
+    return new_words
 
 def parse_words(m):
     if isinstance(m, list):
-        return list(map(parse_word, m))
+        words = m
     else:
-        try:
-            return list(map(parse_word, m.dgndictation[0]._words))
-        except AttributeError as e:
-            print(e)
-            return []
+        words = m.dgndictation[0]._words
+
+    words = list(map(parse_word, words))
+    words = replace_words(words, mappings[2], 2)
+    words = replace_words(words, mappings[3], 3)
+    return words
 
 
 def join_words(words, sep=" "):
