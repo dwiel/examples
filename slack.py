@@ -18,6 +18,7 @@ keymap = {
     'gopreev': Key('shift-alt-up'),
 
     'toggle sidebar': Key('cmd-.'),
+    '(unread threads | new threads)': Key('cmd-shift-t'),
 }
 
 ctx.keymap(keymap)

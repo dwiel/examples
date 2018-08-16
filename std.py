@@ -317,6 +317,7 @@ keymap.update({
     'marpreev': Key('cmd-shift-g'),
     'marthis': [Key('alt-right'), Key('shift-alt-left'), Key('cmd-f'), Key('enter')],
 
+    'launcher': Key('cmd-space'),
     'put computer to sleep': lambda m: os.system('pmset sleepnow'),
 })
 
