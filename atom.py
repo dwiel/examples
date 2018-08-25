@@ -75,7 +75,6 @@ def jump_to_bol_and(then):
 
 def jump_to_eol_and(then):
     def fn(m):
-        print('Hello world', m)
         if len(m._words) > 1:
             jump_to_bol(m)
         press('cmd-right')
@@ -137,10 +136,20 @@ def command(command):
         command_from_palette(command)
     return function
 
-def jump_tab(m):
-    tab_number = parse_words_as_integer(m._words[1:])
+def jump_tab(m, tab_number=None):
+    if tab_number is None:
+        tab_number = parse_words_as_integer(m._words[1:])
+
     if tab_number != None and tab_number > 0 and tab_number < 10:
         press('cmd-%s'%tab_number)
+
+def close_tab(m, tab_number=None):
+    if tab_number is None:
+        tab_number = parse_words_as_integer(m._words[2:])
+
+    if tab_number != None and tab_number > 0 and tab_number < 10:
+        press('cmd-%s'%tab_number)
+        press('cmd-w')
 
 snippets = {
     'define function': 'definefunction',
@@ -193,6 +202,8 @@ keymap = {
     'advanced open file': Key('cmd-alt-o'),
     'pain' + numerals: change_pain,
     'tab' + numerals: jump_tab,
+    'close tab' + numerals: close_tab,
+    '(reopen | unclose) tab': Key('cmd-shift-t'),
     'split pain left': [Key('cmd-k'), Key('left')],
     'split pain right': [Key('cmd-k'), Key('right')],
     'split pain up': [Key('cmd-k'), Key('up')],

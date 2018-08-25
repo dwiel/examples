@@ -1,4 +1,5 @@
 from talon.voice import Context, Key
+from user.switcher import switch_app
 
 ctx = Context('outlook')
 
@@ -8,6 +9,11 @@ ctx.keymap({
     'clear flag': None,
     'next pain': Key('shift-ctrl-['),
     'preev pain': Key('shift-ctrl-]'),
+
+    'dismiss outlook': [
+        lambda m: switch_app(name='outlook'),
+        Key('cmd-w'),
+    ]
 })
 
 

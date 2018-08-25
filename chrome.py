@@ -36,6 +36,7 @@ def refocus_page(m):
     # Escape button
     # This leaves the focus on the page at previous tab focused point, not the beginning of the page
     press('escape')
+    press('escape')
 
 def back(m):
     refocus_page(None)
@@ -52,7 +53,7 @@ def jump_tab(m):
 
 
 context.keymap({
-    '(address bar | focus address | focus url)': focus_address_bar,
+    '(address bar | focus address | focus url | url)': focus_address_bar,
     'copy url': 'yy',
 
     'back[ward]': back,

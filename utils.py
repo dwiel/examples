@@ -65,6 +65,7 @@ mapping = {
     'terrace': 'keras',
     'karis': 'keras',
     'me on': 'neon',
+    'cube nets': 'kubernetes',
     'expand dimms': 'expand dims',
     'dimms': 'dims',
     'dems': 'dims',
