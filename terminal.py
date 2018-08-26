@@ -111,6 +111,7 @@ keymap = {
     'jet pull [<dgndictation>]': ['git pull ', text],
     'jet pull (base | rebase) [<dgndictation>]': ['git pull --rebase ', text],
     'jet push [<dgndictation>]': ['git push ', text],
+    'jet push force [<dgndictation>]': ['git push --force', text],
     'jet rebase [<dgndictation>]': ['git rebase ', text],
     'jet remove [<dgndictation>]': ['git rm ', text],
     'jet reset': 'git reset\n',
