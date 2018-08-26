@@ -104,7 +104,7 @@ keymap = {
     'jet checkout branch [<dgndictation>]': ['git checkout -B ', text],
     'jet commit [<dgndictation>]': ['git commit -m ""', Key('left'), text],
     'jet commit all [<dgndictation>]': ['git commit -a -m ""', Key('left'), text],
-    'jet diff': 'git diff\n',
+    'jet diff [<dgndictation>]': ['git diff ', text],
     'jet history': 'git hist\n',
     'jet merge [<dgndictation>]': ['git merge ', text],
     'jet move [<dgndictation>]': ['git mv ', text],
@@ -115,6 +115,7 @@ keymap = {
     'jet remove [<dgndictation>]': ['git rm ', text],
     'jet reset': 'git reset\n',
     'jet reset hard': 'git reset --hard\n',
+    'jet show': 'git show ',
     'jet stash': 'git stash\n',
     'jet status': 'git status\n',
 
