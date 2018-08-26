@@ -55,6 +55,14 @@ def delayed_dubclick(m):
 def delayed_tripclick(m):
     delayed_click(m, button=0, times=3)
 
+
+def mouse_scroll(amount):
+    def scroll(m):
+        ctrl.mouse_scroll(y=amount)
+
+    return scroll
+
+
 def mouse_drag(m):
     x, y = click_pos(m)
     ctrl.mouse_click(x, y, down=True)
@@ -75,6 +83,9 @@ keymap = {
 	# jsc added
     '(shift click | shicks)' : shift_click,
     '(command click | chom lick)' : command_click,
+
+    "wheel down": mouse_scroll(200),
+    "wheel up": mouse_scroll(-200),    
 }
 
 ctx.keymap(keymap)

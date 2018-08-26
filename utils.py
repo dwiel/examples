@@ -49,6 +49,7 @@ mapping = {
     'stack trace': 'stacktrace',
     'repose': 'repos',
     'ellis': 'elif',
+    'tubal': 'tuple',
     'deck': 'deque',
     "log it's": 'logits',
     'sell': 'cell',

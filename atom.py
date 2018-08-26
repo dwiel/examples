@@ -1,3 +1,5 @@
+import time
+
 from talon.voice import Key, press, Str, Context
 from user import std
 from user.utils import parse_words_as_integer, parse_words, numeral_map, numerals, optional_numerals, text
@@ -128,7 +130,9 @@ def change_pain(m):
 
 def command_from_palette(command):
     press(atom_command_pallet)
+    time.sleep(0.25)
     Str(command)(None)
+    time.sleep(0.25)
     press('enter')
 
 def command(command):
@@ -162,6 +166,8 @@ snippets = {
     'from': 'from',
     'list': 'list',
     'dictionary': 'dict',
+    'if name main': 'ifnamemain',
+    'if name main main': 'ifnamemainmain',
 }
 
 def code_snippet(m):

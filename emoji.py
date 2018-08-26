@@ -14,6 +14,7 @@ emojis = {
     'crossed fingers': ':crossed_fingers:',
     'fingers': ':crossed_fingers:',
     'fingers': ':crossed_fingers:',
+    'pray': ':pray:',
 }
 
 def react(m):

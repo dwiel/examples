@@ -108,11 +108,12 @@ keymap.update({
 
     '(%s)+ [<dgndictation>] [over]' % (' | '.join(formatters)): FormatText,
 
-    '(tarp | tab)':   Key('tab'),
-    '(crimp | left)':  Key('left'),
+    '(tarp | tab)': Key('tab'),
+    'tarpy': [Key('tab'), Key('tab')],
+    '(crimp | left)': Key('left'),
     '(chris | right)': Key('right'),
-    '(jeep | up)':    Key('up'),
-    '(doom | down)':  Key('down'),
+    '(jeep | up)': Key('up'),
+    '(doom | down)': Key('down'),
 
     '(delete | junk)': Key('backspace'),
     'trough': Key('alt-backspace'),
