@@ -100,4 +100,6 @@ context.keymap({
     'copy': Key('cmd-c'),
     'paste': Key('cmd-v'),
     'paste same style': Key('cmd-alt-shift-v'),
+
+    'mendeley': Key('cmd-shift-m'),
 })
