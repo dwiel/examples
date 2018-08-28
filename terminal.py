@@ -54,7 +54,7 @@ keymap = {
     'durrup': 'cd ..; ls\n',
     'go back': 'cd -\n',
 
-    'dash <dgndictation>': dash,
+    'dash <dgndictation> [over]': dash,
 
     'pseudo': 'sudo ',
     'shell clear': [Key('ctrl-c'), 'clear\n'],
@@ -69,7 +69,8 @@ keymap = {
     'shell remove [<dgndictation>]': ['rm ', text],
     'shell remove (recursive | curse) [<dgndictation>]': ['rm -rf ', text],
     "shell enter": "ag -l | entr ",
-    "shell enter to": "ag -l . ../.. | entr ",
+    "shell enter 1": "ag -l . .. | entr ",
+    "shell enter 2": "ag -l . ../.. | entr ",
     'shell less [<dgndictation>]': ['less ', text],
     'shell cat [<dgndictation>]': ['cat ', text],
     'shell X args [<dgndictation>]': ['xargs ', text],
@@ -85,21 +86,14 @@ keymap = {
     'apt get update': 'apt-get update ',
     'apt get upgrade': 'apt-get upgrade ',
 
-    # make
-    'make': 'make\n',
-    'make run': 'make run\n',
-    'make test': 'make test\n',
-    'make build': 'make build\n',
-
     # git
     'jet [<dgndictation>]': ['git ', text],
     'jet add [<dgndictation>]': ['git add ', text],
-    'jet branch': 'git branch\n',
+    'jet branch': 'git branch',
     'jet branch delete [<dgndictation>]': ['git branch -D ', text],
     'jet branch all [<dgndictation>]': ['git branch -a ', text],
     'jet clone [<dgndictation>]': ['git clone ', text],
     'jet checkout master': 'git checkout master\n',
-    'jet checkout max [<dgndictation>]': ['git checkout ', text],
     'jet checkout [<dgndictation>]': ['git checkout ', text],
     'jet checkout branch [<dgndictation>]': ['git checkout -B ', text],
     'jet commit [<dgndictation>]': ['git commit -m ""', Key('left'), text],
@@ -109,7 +103,7 @@ keymap = {
     'jet merge [<dgndictation>]': ['git merge ', text],
     'jet move [<dgndictation>]': ['git mv ', text],
     'jet pull [<dgndictation>]': ['git pull ', text],
-    'jet pull (base | rebase) [<dgndictation>]': ['git pull --rebase ', text],
+    'jet pull (base | re-base) [<dgndictation>]': ['git pull --rebase ', text],
     'jet push [<dgndictation>]': ['git push ', text],
     'jet push force [<dgndictation>]': ['git push --force', text],
     'jet rebase [<dgndictation>]': ['git rebase ', text],
@@ -117,8 +111,9 @@ keymap = {
     'jet reset': 'git reset\n',
     'jet reset hard': 'git reset --hard\n',
     'jet show': 'git show ',
-    'jet stash': 'git stash\n',
-    'jet status': 'git status\n',
+    'jet stash': 'git stash',
+    'jet stash apply': 'git stash apply',
+    'jet status': 'git status',
 
     # Tools
     '(grep | grip)': ['grep  .', Key('left left')],

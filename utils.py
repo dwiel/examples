@@ -62,11 +62,16 @@ mapping = {
     'gnome': 'num',
     'don': 'done',
 
+    'g cloud': 'gcloud',
+    'voice code': 'voicecode',
+
     'nirvana': 'nervana',
     'terrace': 'keras',
     'karis': 'keras',
     'me on': 'neon',
     'cube nets': 'kubernetes',
+    'q burnett': 'kubernetes',
+    'cooper9': 'kubernetes',
     'expand dimms': 'expand dims',
     'dimms': 'dims',
     'dems': 'dims',

@@ -159,6 +159,7 @@ snippets = {
     'define function': 'definefunction',
     'define method': 'definemethod',
     'define command': 'definecommand',
+    'define class': 'class',
     'doc string': 'docstring',
     'for loop': 'forloop',
     'print': 'print',
@@ -172,6 +173,11 @@ snippets = {
 
 def code_snippet(m):
     words = ' '.join([str(word).lower() for word in m._words[1:]])
+    Str(snippets[words])(None)
+    press('tab')
+
+def code_snippet_naked(m):
+    words = ' '.join([str(word).lower() for word in m._words[0:]])
     Str(snippets[words])(None)
     press('tab')
 
@@ -228,7 +234,7 @@ keymap = {
     'remove matching brackets': command('bracket-matcher:remove-matching-brackets'),
 
     'quinn' + '({})'.format(' | '.join(snippets.keys())): code_snippet,
-    '({})'.format(' | '.join(snippets.keys())): code_snippet,
+    # '({})'.format(' | '.join(snippets.keys())): code_snippet_naked,
 
     # python
     'quinn if': ['if :', Key('left')],

@@ -11,7 +11,7 @@ keymap = {
 
     # Application navigation
     'swick': Key('cmd-tab'),
-    'totch': Key('cmd-w'),
+    # 'totch': Key('cmd-w'),
     'new window': Key('cmd-n'),
     '(next window | gibby)': Key('cmd-`'),
     '(last window | shibby)': Key('cmd-shift-`'),

@@ -41,10 +41,12 @@ def refocus_page(m):
 def back(m):
     refocus_page(None)
     press('cmd-[')
+    refocus_page(None)
 
 def forward(m):
     refocus_page(None)
     press('cmd-]')
+    refocus_page(None)
 
 def jump_tab(m):
     tab_number = parse_words_as_integer(m._words[1:])

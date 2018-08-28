@@ -20,6 +20,7 @@ shrink_map = {
     'applications': 'apps',
     'arguments': 'args',
     'attributes': 'attrs',
+    'authentication': 'auth',
     'button': 'btn',
     'command': 'cmd',
     'compute': 'cmp',
