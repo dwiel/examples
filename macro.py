@@ -1,4 +1,4 @@
-from talon.voice import Context, talon, Key, Str
+from talon.voice import Context, talon, Key, Str, press
 from talon.engine import engine
 from user.utils import text_to_number
 
@@ -51,7 +51,7 @@ def macro_print(m):
         for action, rule in item:
             if isinstance(action, Key):
                 actions.append('press("{}")'.format(action.data))
-            if isinstance(action, Str):
+            elif isinstance(action, Str):
                 actions.append('Str("{}")(None)'.format(action.data))
             else:
                 # TODO: other conditions

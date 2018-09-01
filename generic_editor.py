@@ -1,5 +1,4 @@
 # https://github.com/JonathanNickerson/talon_voice_user_scripts
-# jsc added indent/outdent and simplified jolt
 
 import time
 
@@ -248,7 +247,7 @@ keymap = {
     # 'dear' + optional_numerals: jump_to_eol_and(lambda: None),
     # 'smear' + optional_numerals: jump_to_eol_and(jump_to_nearly_end_of_line),
     # 'trundle' + optional_numerals: jump_to_bol_and(toggle_comments),
-    'jolt': Key('ctrl-a cmd-left shift-down cmd-c down cmd-v' ),		# jsc simplified
+    # 'jolt': Key('ctrl-a cmd-left shift-down cmd-c down cmd-v' ),		# jsc simplified
     # 'snipline' + optional_numerals: jump_to_bol_and(snipline),
 
     # NB these do not work properly if there is a selection

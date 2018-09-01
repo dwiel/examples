@@ -62,6 +62,7 @@ mapping = {
     'gnome': 'num',
     'don': 'done',
 
+    'jet': 'git',
     'g cloud': 'gcloud',
     'voice code': 'voicecode',
 

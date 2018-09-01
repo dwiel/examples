@@ -1,6 +1,6 @@
 import time
 
-from talon.voice import Key, press, Str, Context
+from talon.voice import Key, press, Str, Context, Rule
 from user import std
 from user.utils import parse_words_as_integer, parse_words, numeral_map, numerals, optional_numerals, text
 
@@ -43,6 +43,14 @@ def text_to_number(m):
 
     return result
 
+def text_to_number_wrapper(func):
+    def wrapper(*args, **kwargs):
+        if not kwargs and len(args) == 1:
+            if isinstance(args[0], Rule):
+                args = (text_to_number(args[0]),) + args[1:]
+        func(*args, **kwargs)
+
+    return wrapper
 
 def parse_word(word):
     word = word.lstrip('\\').split('\\', 1)[0]
@@ -50,8 +58,8 @@ def parse_word(word):
 
 
 ######### actions and helper functions
-def jump_to_bol(m):
-    line = text_to_number(m)
+@text_to_number_wrapper
+def jump_to_bol(line):
     press('ctrl-g')
     Str(str(line))(None)
     press('enter')
@@ -118,6 +126,19 @@ def select_lines(m):
     #  the atom package as lines 99..102
     line_range = text_to_number(m)
     execute_atom_command(COMMANDS.SELECT_LINES, str(line_range))
+
+def cut_line(m):
+    jump_to_bol(m)
+    press("cmd-left")
+    press("shift-down")
+    press("cmd-x")
+
+
+def paste_line(m):
+    jump_to_bol(m)
+    press("cmd-left")
+    press("cmd-v")
+
 
 def change_pain(m):
     line = text_to_number(m)
@@ -191,6 +212,9 @@ keymap = {
     'jolt': Key('cmd-x cmd-v cmd-v'),
 
     'snipline' + optional_numerals: jump_to_bol_and(snipline),
+    'cut line' + optional_numerals: cut_line,
+    'paste line' + optional_numerals: paste_line,
+
 
     # 'snipple': [Key(atom_hotkey), Key(COMMANDS.DELETE_TO_BOL)],
     # 'snipper': [Key(atom_hotkey), Key(COMMANDS.DELETE_TO_EOL)],
@@ -225,7 +249,9 @@ keymap = {
     'command pallet': Key(atom_command_pallet),
     'cursor center': command('center-line:toggle'),
     'cursor top': [command('center-line:toggle'), command('center-line:toggle')],
-    'cell pair': command('py-ast-edit:select-parent'),
+    # 'cell pair': command('py-ast-edit:select-parent'),
+    'cell expand': Key('alt-up'),
+    'cell contract': Key('alt-down'),
     'cell this': command('py-ast-edit:select-this'),
 
     # needs bracket-matcher atom package; still a bit poor.

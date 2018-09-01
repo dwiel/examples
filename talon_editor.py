@@ -43,6 +43,8 @@ alnum['left'] = 'left'
 alnum['right'] = 'right'
 alnum['enter'] = 'enter'
 alnum['space'] = ' '
+alnum['comma'] = ','
+
 
 keys = '({})'.format(' | '.join(list(alnum.keys()) + list(string.ascii_uppercase)))
 print(keys)
