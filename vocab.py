@@ -1,5 +1,6 @@
 from talon.engine import engine
 add_words = [
+    # r'dockerfile',
     # r'docker file\dockerfile',
     # r'jace on\json',
     # r'mobile shell\mosh',
