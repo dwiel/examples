@@ -1,28 +1,102 @@
-from talon.engine import engine
-add_words = [
-    # r'dockerfile',
-    # r'docker file\dockerfile',
-    # r'jace on\json',
-    # r'mobile shell\mosh',
-    # r'virtual env\virtualenv',
-    # r'typed_word\spoken word'
-    # r''
-]
-remove_words = [
-    # r'(\left-parenthesis\left paren',
-    # r'(\left-parenthesis\left parenthesis',
-    # r')\right-parenthesis\right paren',
-    # r')\right-parenthesis\right parenthesis',
-    # r'[\left-square-bracket\left bracket',
-    # r']\right-square-bracket\right bracket',
-]
-def on_ready(j):
-    if add_words:
-        engine.cmd('w.add', words=add_words)
-    if remove_words:
-        engine.cmd('w.remove', words=remove_words)
+from talon.voice import Context
 
-engine.register('ready', on_ready)
+ctx = Context("vocab")
+ctx.vocab = [
+    # start up
+    "pitch deck",
+    # linux
+    "PWD",
+    "Wget",
+    "SSH",
+    # python
+    "smartnav",
+    "pip",
+    "pip install",
+    "ipython",
+    "iter",
+    "NP",
+    "yield",
+    "python3",
+    "conda",
+    # programming
+    "refactor",
+    "contrib",
+    "yaml",
+    "yamel",
+    "namespace",
+    # git
+    "pull request",
+    "rebase",
+    "rebased",
+    "mergeable",
+    # reinforcement learning
+    "DQN",
+    "cart pole",
+    # deep learning
+    "LSTM",
+    "RNN",
+    "KNN",
+    "GRU",
+    "GPU",
+    "SGD",
+    "word2vec",
+    "op graph",
+    "initializer",
+    "keras",
+    "tensorflow",
+    "pytorch",
+    "matmul",
+    "frontends",
+    "expand dims",
+    "gan",
+    "NG",
+    "minibatch",
+    "affine",
+    "affine layer",
+    "affine embedding",
+    "linear layer",
+    "argmax",
+    "encode",
+    "onehot",
+    "multihot",
+    "embeddings",
+    "end to end",
+    "unordered axes",
+    "convolution",
+    "convolutional",
+    "conv",
+    "conv net",
+    "hyper parameter",
+    "epsilon",
+    "start epsilon",
+    "end epsilon",
+    "model end",
+    "discretized",
+    "decay",
+    "embedder",
+    # docker
+    "docker",
+    "dockerfile"
+    # intel
+    "folsom",
+    "folsom lab",
+    "ncloud",
+    "SGI",
+    # distributed web
+    "IPFS",
+    "ethereum",
+    # mac
+    "brew install",
+    # voice
+    "voicecode",
+    # personal
+    "IU",
+    # names
+    "fiaz",
+    "yinyin",
+    "channel yinyin",
+]
+ctx.vocab_remove = ["doctor", "Doctor", "dockerfilefolsom"]
 
 """
     # miscellaneous
