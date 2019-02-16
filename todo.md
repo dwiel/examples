@@ -1,3 +1,5 @@
+
+
 `never again` -> never do that ever again, talon remembers which utterances have been banned
 bang 2 -> pain 2
 may crunder -> make run
@@ -32,3 +34,4 @@ youtube: add to library, from anywhere
 python
   convert lambda to function
   convert list comprehension into for loop
+  convert item to attribute: object["name"] -> object.name
